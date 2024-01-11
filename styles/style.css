@@ -158,6 +158,62 @@ body {
   background: #ff0080;
   color: white;
 }
+/* Add these styles to your existing CSS file or style tag */
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle,
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop {
+  cursor: pointer;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle i,
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop i {
+  font-size: 1.1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  color: #ff004c;
+  padding: 15px;
+  border-radius: 100%;
+  transition: 0.3s;
+  border: 2px solid #ff0080;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle i:hover,
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop i:hover {
+  background: #ff0080;
+  color: white;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle {
+  margin-right: 10px;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle:hover,
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop:hover {
+  color: #ff4500;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle i {
+  border: none;
+  border: 2px solid transparent;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Shuffle i:hover {
+  border-color: #ff0080;
+  background: none;
+  color: #ff0080;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop i {
+  border: none;
+  border: 2px solid transparent;
+}
+
+#AllInBody #ContentWarpper #WholeCardContainer #MusicControls div#Loop i:hover {
+  border-color: #ff0080;
+  background: none;
+  color: #ff0080;
+}
+
 
 #AllInBody #ContentWarpper #Progress_elements {
   padding: 10px 0px;
