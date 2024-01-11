@@ -40,7 +40,7 @@ body {
   display: grid;
   place-items: center;
   padding: 50px 0px;
-  background: linear-gradient(45deg, rgba(0, 238, 255, 0.842), rgba(255, 0, 149, 0.651)), url(../img/bg.jpg);
+  background: linear-gradient(45deg, rgba(0, 238, 255, 0.842), rgba(255, 0, 149, 0.651)), url(../img/bg.gif);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
