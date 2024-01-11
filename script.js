@@ -18,6 +18,9 @@ const progressBar = document.querySelector("#ProgressMeterContainer");
 
 let isPlaying = false;
 let index = 0;
+let isShuffling = false; // New variable for shuffle functionality
+let isLooping = false; // New variable for looping functionality
+
 
 const songDataBase = [
   {
@@ -70,15 +73,75 @@ const songDataBase = [
   },
   {
     songSrc: "./music/music9.mp3",
-    title: "I'll Face Myself -Battle-",
+    title: "I'll Face Myself -Battle- - Persona 4 Reincarnation",
     artist: "Mix",
     imgSrc: "./img/music9.png",
   },
   {
     songSrc: "./music/music10.mp3",
-    title: "Rivers in The Desert",
+    title: "Rivers in The Desert - Persona 5",
     artist: "Maher Zain",
     imgSrc: "./img/music10.jpg",
+  },
+  {
+    songSrc: "./music/music11.mp3",
+    title: "Never More - Persona 4 Reincarnation",
+    artist: "Shoji Meguro & Shihoko Hirata",
+    imgSrc: "./img/music11.webp",
+  },
+  {
+    songSrc: "./music/music12.mp3",
+    title: "Wiping All Out - Persona 3 Portable",
+    artist: "Shoji Meguro & Mayumi Fujita",
+    imgSrc: "./img/music12.jpeg",
+  },
+  {
+    songSrc: "./music/music13.mp3",
+    title: "A Lone Prayer - Shin Megami Tensei: Persona",
+    artist: "Shoji Meguro & Yumi Kawamura",
+    imgSrc: "./img/music13.jpg",
+  },
+  {
+    songSrc: "./music/music14.mp3",
+    title: "I Believe - Persona 5",
+    artist: "Lyn",
+    imgSrc: "./img/music14.webp",
+  },
+  {
+    songSrc: "./music/music15.mp3",
+    title: "Heaven - Persona 4",
+    artist: "Shoji Meguro & Shihoko Hirata",
+    imgSrc: "./img/music15.webp",
+  },
+  {
+    songSrc: "./music/music16.mp3",
+    title: "Specialist - Persona 4",
+    artist: "Shoji Meguro",
+    imgSrc: "./img/music16.avif",
+  },
+  {
+    songSrc: "./music/music17.mp3",
+    title: "Mass Destruction - Persona 3",
+    artist: "Lotus Juice & Yumi Kawamura",
+    imgSrc: "./img/music17.jpeg",
+  },
+  {
+    songSrc: "./music/music18.mp3",
+    title: "The Whims of Fate - Persona 5",
+    artist: "Lyn",
+    imgSrc: "./img/music18.webp",
+  },
+  {
+    songSrc: "./music/music19.mp3",
+    title: "Price - Persona 5",
+    artist: "Shoji Meguro",
+    imgSrc: "./img/music19.jpg",
+  },
+  {
+    songSrc: "./music/music20.mp3",
+    title: "Beneath the Mask - Persona 5",
+    artist: "Lyn",
+    imgSrc: "./img/music20.webp",
   },
 ];
 
@@ -92,6 +155,63 @@ audio.addEventListener("ended", () => {
   loadMusic(index++);
   play();
 });
+// Function to shuffle the songs
+const shuffleSongs = () => {
+  let shuffledIndex = Math.floor(Math.random() * songDataBase.length);
+  // Make sure the shuffled index is different from the current index
+  while (shuffledIndex === index) {
+    shuffledIndex = Math.floor(Math.random() * songDataBase.length);
+  }
+  index = shuffledIndex;
+  loadMusic();
+  play();
+};
+
+// Function to toggle shuffle mode
+const toggleShuffle = () => {
+  isShuffling = !isShuffling;
+  if (isShuffling) {
+    // If shuffle is enabled, shuffle the songs and update button style
+    shuffleSongs();
+    nextButton.classList.add("shuffle");
+  } else {
+    // If shuffle is disabled, remove shuffle style
+    nextButton.classList.remove("shuffle");
+  }
+};
+
+// Function to toggle loop mode
+const toggleLoop = () => {
+  isLooping = !isLooping;
+  audio.loop = isLooping; // Set the loop property of the audio element
+  if (isLooping) {
+    // If loop is enabled, update button style
+    nextButton.classList.add("loop");
+  } else {
+    // If loop is disabled, remove loop style
+    nextButton.classList.remove("loop");
+  }
+};
+
+// Event listener for shuffle button click
+document.querySelector("#Shuffle").addEventListener("click", toggleShuffle);
+
+// Event listener for loop button click
+document.querySelector("#Loop").addEventListener("click", toggleLoop);
+
+audio.addEventListener("ended", () => {
+  if (isShuffling) {
+    // If shuffle is enabled, shuffle the songs
+    shuffleSongs();
+  } else if (isLooping) {
+    // If loop is enabled, play the same song again
+    play();
+  } else {
+    // Otherwise, play the next song in the list
+    loadMusic(index++);
+    play();
+  }
+});
 
 loadMusic();
 
@@ -101,6 +221,22 @@ nextButton.addEventListener("click", () => {
     play();
   } else {
     pause();
+  }
+});
+nextButton.addEventListener("click", () => {
+  if (isShuffling) {
+    // If shuffle is enabled, shuffle the songs
+    shuffleSongs();
+  } else if (isLooping) {
+    // If loop is enabled, play the same song again
+    play();
+  } else if (index < songDataBase.length - 1) {
+    // Otherwise, play the next song in the list
+    loadMusic(index++);
+    play();
+  } else {
+    // If at the end of the list, pause or loop based on loop mode
+    isLooping ? play() : pause();
   }
 });
 previousButton.addEventListener("click", () => {
